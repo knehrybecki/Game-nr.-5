@@ -34,18 +34,18 @@ export const renderGame = () => {
 
 renderGame()
 
-const text = document.querySelector('.main__text')
+export const text = document.querySelector('.main__text')
 
 const startGame = () => {
-    text.style.display = 'none'
+    text.textContent = "Press Space to Launch Ball"
 
     createBall()
     moveGoal()
     timerAndScore()
 
-    window.removeEventListener('keypress', startGame )
-    window.addEventListener('keydown', createMoveBar )
-    window.addEventListener('keydown', hit )
+    window.removeEventListener('keypress', startGame)
+    window.addEventListener('keydown', createMoveBar)
+    window.addEventListener('keydown', hit)
 }
 
-window.addEventListener('keypress', startGame )
+window.addEventListener('keypress', startGame)

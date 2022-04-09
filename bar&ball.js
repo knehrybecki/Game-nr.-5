@@ -1,4 +1,5 @@
-import { yAxis } from './moveGoal.js'
+import { yGoal } from './moveGoal.js'
+import { text } from './script.js'
 
 const scores = document.querySelector('.score-time')
 
@@ -20,7 +21,6 @@ export const timerAndScore = () => {
         const result = time.toString().padStart(2, '0')
 
         scores.textContent = `00:${result} / Score: ${score}`
-
     }, 1000)
 }
 
@@ -38,8 +38,10 @@ export const createMoveBar = event => {
     const gameBar = document.querySelector('.game__bar')
 
     if (event.key === 'ArrowUp') {
-        if (yBar <= -300) {
-            if (event.key === 'ArrowUp') return
+        if (yBar <= -200) {
+            if (event.key === 'ArrowUp') {
+                return
+            }
         }
 
         yBar -= 10
@@ -48,8 +50,10 @@ export const createMoveBar = event => {
     }
 
     if (event.key === 'ArrowDown') {
-        if (yBar >= 300) {
-            if (event.key === 'ArrowDown') return
+        if (yBar >= 200) {
+            if (event.key === 'ArrowDown') {
+                return
+            }
         }
 
         yBar += 10
@@ -62,8 +66,10 @@ export const hit = event => {
     if (event.code === 'Space') {   
         ball() 
 
-        window.removeEventListener('keydown', createMoveBar )
-        window.removeEventListener('keydown', hit )
+        text.style.display = "none"
+
+        window.removeEventListener('keydown', createMoveBar)
+        window.removeEventListener('keydown', hit)
     }
 }
 
@@ -82,8 +88,8 @@ const ball = () => {
         ball.style.transform += `rotate(${rotate}deg)`
 
         if (x > 1000) {
-            if (Math.sign(yAxis) === 1) {
-                if (yBar <= yAxis + 50 && yBar >= yAxis - 50) {
+            if (Math.sign(yGoal) === 1) {
+                if (yBar <= yGoal + 50 && yBar >= yGoal - 50) {
                     score++
                     scores.textContent = `00:${time} / Score: ${score}`
 
@@ -95,8 +101,8 @@ const ball = () => {
                 }
             }
 
-            if (Math.sign(yAxis) === -1) {
-                if (yBar >= yAxis - 50 && yBar <= yAxis + 50) {
+            if (Math.sign(yGoal) === -1) {
+                if (yBar >= yGoal - 50 && yBar <= yGoal + 50) {
                     score++
                     scores.textContent = `00:${time} / Score: ${score}`
 
@@ -108,8 +114,8 @@ const ball = () => {
                 }
             }
 
-            window.addEventListener('keydown', createMoveBar )
-            window.addEventListener('keydown', hit )
+            window.addEventListener('keydown', createMoveBar)
+            window.addEventListener('keydown', hit)
 
             x = 0
             rotate = 0

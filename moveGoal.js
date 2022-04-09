@@ -1,7 +1,7 @@
-export let yAxis = 0
+export let yGoal = 0
 
 const randomMove = () => {
-    return Math.floor(Math.random() * (325 - -325) + -325)
+    return Math.floor(Math.random() * 400 - 200)
 }
 
 let random = randomMove()
@@ -11,21 +11,21 @@ export const moveGoal = () => {
 
     setInterval(() => {
         if (Math.sign(random) === -1) {
-            yAxis -= 1
+            yGoal -= 1
 
-            gameGoal.style.transform = `translateY(${yAxis}px)`
+            gameGoal.style.transform = `translateY(${yGoal}px)`
 
-            if (yAxis <= random) {
+            if (yGoal <= random) {
                 random = randomMove()
             }
         }
 
         if (Math.sign(random) === 1) {
-            yAxis += 1
+            yGoal += 1
 
-            gameGoal.style.transform = `translateY(${yAxis}px)`
+            gameGoal.style.transform = `translateY(${yGoal}px)`
 
-            if (yAxis >= random) {
+            if (yGoal >= random) {
                 random = randomMove()
            }
         }
